@@ -9,7 +9,7 @@
 </head>
 <body>
 Hello
-${UserManage} 
+
 
 
 <c:forEach var="item" items="${UserManage}" varStatus="status">

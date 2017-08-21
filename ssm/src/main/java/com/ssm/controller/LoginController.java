@@ -86,4 +86,19 @@ public class LoginController {
 		return "UserManage";
 		
 	}
+	
+	@RequestMapping("/userlist")
+	public String userList(){
+		
+		return "userlist";
+	}
+	
+	@RequestMapping("/userlistdata")
+	public @ResponseBody Result userListData(){
+		
+		Result result=new Result();
+		result.setCode(1);
+		result.setData(this.userdao.getAll());
+		return result;
+	}
 }
