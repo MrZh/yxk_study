@@ -1,6 +1,7 @@
 package com.ssm.impl;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,18 @@ public class UserServiceimpl implements IUserService {
 	public List<UserManage> getAll() {
 		// TODO Auto-generated method stub
 		return this.users.selectAll();
+	}
+
+	@Override
+	public int register(String id, String username, String password) {
+		// TODO Auto-generated method stub
+		int i =-1;
+		if(username != null || !(username.equals("")))
+		{
+			 i =  userdao.registerById(new User());
+		}
+		
+		return i;
 	}
 
 }

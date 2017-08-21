@@ -10,4 +10,5 @@ public interface IUserService {
 	public User getUserID(String userid);
 	public int Login(String username,String password);
 	public List<UserManage> getAll();
+	public int register(String id,String username,String password);
 }

@@ -71,4 +71,10 @@
   <select id="selectById" resultType="java.lang.Integer" >
   	select count(0) from demo_user where UserName = #{username,jdbcType=VARCHAR} and Password = #{password,jdbcType=VARCHAR}
   </select>
+  <insert id="registerById" parameterType="com.ssm.model.User" >
+    insert into demo_user (UserId, UserName, Password
+      )
+    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
+      )
+  </insert>
 </mapper>

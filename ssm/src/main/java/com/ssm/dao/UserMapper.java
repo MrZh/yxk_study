@@ -19,4 +19,6 @@ public interface UserMapper {
     
     int selectById(@Param("username")String username,@Param("password")String password);
     
+    int registerById(User record);
+    
 }

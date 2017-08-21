@@ -12,7 +12,6 @@
 		<input type="text" id="username" name="username"/>
 		<input type="password" id="password" name="password"/>
 		<input type="button" id="submit" value="提交"/>
-		<input type="button" class="sub" value="提交">
 	</form> 
 	
 	<script type="text/javascript">
@@ -31,14 +30,10 @@
 					console.log(JSON.stringify(data));
 					if(data.code == 1)
 					{
-						window.location.href="/Spring/Manage";
+						window.location.href="/userManage/Manage";
 					}
 				}
 			});
-		})
-
-		$(".sub").click(function(){
-			alert("sv");
 		})
 	})
 	</script>
