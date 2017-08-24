@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>开始使用Layui</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../style/admin.css">
+</head>
+<body style="background: #0ca3d2;">
+<div class="container">
+    <div class="login">
+        <h1>Login to Web App</h1>
+        <form  action="" class="layui-form">
+            <p><input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input"></p>
+            <p><input type="password" name="password" lay-verify="pass" placeholder="请输入密码" autocomplete="off" class="layui-input"></p>
+            <p class="remember_me">
+
+            </p>
+            <p class="submit"> <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button></p>
+        </form>
+    </div>
+
+    <div class="login-help">
+        <p>忘记您的密码？ <a>点击找回</a>.</p>
+    </div>
+</div>
+
+
+
+<script src="../layui/layui.js"></script>
+<script>
+
+    //一般直接写在一个js文件中
+    layui.use(['jquery','layer', 'form', 'element'], function () {
+        var $ = layui.jquery,
+            layer = layui.layer,
+            form = layui.form(),
+            element = layui.element();
+        form.verify({
+            title: function(value){
+                if(value.length < 5){
+                    return '标题至少得5个字符啊';
+                }
+            }
+            ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+        });
+    });
+</script>
+
+</body>
+</html>
