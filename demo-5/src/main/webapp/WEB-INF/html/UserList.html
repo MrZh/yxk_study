@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../style/admin.css">
+<meta http-equiv="Content-Type" content="text/html; charset="UTF-8">
+<script src="/js/jquery-3.2.1.min.js"></script>
+<title>用户列表</title>
+</head>
+<body>
+<div class="layui-site-content ">
+    <h1 class="layui-colla-title title-from">新增人员</h1>
+    <div class="layui-clear search-box">
+        <div class="site-left">
+            <div class="site-content">
+                <div class="layui-inline">
+                    <label class="layui-form-label">人员名字</label>
+                    <div class="layui-input-inline">
+                        <input type="text" lay-verify="title" autocomplete="off" placeholder="请输入名字" class="layui-input" >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="site-right">
+            <button class="layui-btn layui-btn-normal">搜索</button>
+        </div>
+    </div>
+    <div class="button-box">
+        <button class="layui-btn" id="add">新增</button>
+        <button class="layui-btn" id="update">修改</button>
+        <button class="layui-btn layui-btn-danger" id="delete">删除</button>
+        <button class="layui-btn" id=>离职</button>
+        <button class="layui-btn">人事变动</button>
+        <button class="layui-btn">转正</button>
+    </div>
+  
+    <table border="1">
+    <colgroup>
+      <col width="50">
+      <col width="150">
+      <col width="150">
+      <col width="200">
+      <col>
+    </colgroup>
+    <thead>
+      <tr>
+        <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
+        <th>人物</th>
+        <th>民族</th>
+        <th>出场时间</th>
+        <th>格言</th>
+      </tr> 
+    </thead>
+    <tbody>
+      <tr align="center">
+        <td><input type="checkbox" name="" value="a" lay-skin="primary"></td>
+        <td>贤心</td>
+        <td>汉族</td>
+        <td>1989-10-14</td>
+        <td>人生似修行</td>
+      </tr>
+
+    </tbody>
+  </table>
+    </div>
+    <div id="demo1" class="page-box"></div>
+</div>
+<script type="text/javascript">
+	$().ready(function(){
+		$("#add").click(function(){
+			$.ajax({
+				url:"/login/userlist",
+				type:"get",
+				data:{
+					
+				},
+				success:function(data){
+					console.log(JSON.stringify(data));
+					
+				}
+			});
+		})
+	})
+	</script>
+</body>
+</html>

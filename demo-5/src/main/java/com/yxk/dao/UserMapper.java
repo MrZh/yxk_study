@@ -19,7 +19,7 @@ public interface UserMapper {
      * ����һ���ӿڣ��䲻��Ҫ��ȥʵ����
      * �±߷ֱ��ǲ��룬ɾ�����޸ģ���ѯһ����¼����ѯ���еļ�¼
      * */
-	@Delete("delete from demo_user UserId=#{id}")
+	@Delete("delete from demo_user where UserId=#{id}")
 	int getDeleteUser(String id);
 	
 	@Delete("delete  from demo_user where UserId = #{userid}")

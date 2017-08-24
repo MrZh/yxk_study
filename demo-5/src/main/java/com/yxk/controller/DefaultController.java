@@ -18,7 +18,7 @@ public class DefaultController {
 	@RequestMapping("/index")
 	public String Index(HttpServletRequest request) {
 		
-		userDao.getDeleteUser("111");
+		//userDao.getDeleteUser("d21133");
 		return "showMessage";
 	}
 }
