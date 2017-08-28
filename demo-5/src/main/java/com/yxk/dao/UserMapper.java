@@ -20,7 +20,7 @@ public interface UserMapper {
      * �±߷ֱ��ǲ��룬ɾ�����޸ģ���ѯһ����¼����ѯ���еļ�¼
      * */
 	@Delete("delete from demo_user where UserId=#{id}")
-	int getDeleteUser(String id);
+	int getDeleteUser(@Param("userId")String id);
 	
 	@Delete("delete  from demo_user where UserId = #{userid}")
 	int deleteByPrimaryKey(String userid);
@@ -39,5 +39,8 @@ public interface UserMapper {
     
     @Select("select count(0) from demo_user where UserName = #{username} and Password = #{password}")
     int selectByPrimaryKey(@Param("username")String username,@Param("password")String password);
+    
+    @Select("select count(0) from demo_user where UserName = #{username}")
+    int selectByUserNmae(@Param("username")String username);
 }
 

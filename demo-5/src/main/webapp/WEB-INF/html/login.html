@@ -3,14 +3,21 @@
 <head>
 
 <title>用户登录</title>
-<script src="/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="/js/jquery-3.2.1.min.js" ></script>
+<script src="/layui/css/layui.css"></script>
+<script src="/style/admin.css"></script>
 </head>
-<body>
-	<form action="/login/in" method="post">
-		UserName:<input type="text" id="username" /> <br>
-		PassWord:<input type="password" id="password" /> 
-		<br> <input type="button" id="check" value="login" />
-	</form>
+<body style="background: #0ca3d2">
+<div class="container">
+	<div class="login">
+		<form action="/login/in" method="post" class="layui-form">
+			UserName:<input type="text" id="username" lay-verify="title" autocomplete="off" placeholder="请输入用户名" class="layui-input"/> <br>
+			PassWord:<input type="password" id="password"  lay-verify="pass" placeholder="请输入密码" autocomplete="off" class="layui-input" /> 
+			<br> <input type="button" id="check" value="login" />
+			     <input type="button" id="register" onclick="javascript:window.location.href='/register/'" value="register" />
+		</form>
+	</div>
+</div>
 	<script type="text/javascript">
 		$().ready(function() {
 			$("#check").click(function() {
@@ -24,12 +31,13 @@
 					success : function(data) {
 						alert(data.message);
 						if (data.code == 1) {
-							window.location.href = "/login/userlist"
+							window.location.href = "/UserList/"
 						}
 					}
 				});
 
 			})
+			
 		})
 	</script>
 </body>

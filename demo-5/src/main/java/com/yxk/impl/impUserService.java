@@ -28,4 +28,22 @@ public class impUserService implements UserService{
 		return this.userMapper.getAll();
 	}
 
+	@Override
+	public int getUserName(String username) {
+		// TODO Auto-generated method stub
+		return this.userMapper.selectByUserNmae(username);
+	}
+
+	@Override
+	public int deleteUser(String userid) {
+		// TODO Auto-generated method stub
+		return this.userMapper.deleteByPrimaryKey(userid);
+	}
+
+	@Override
+	public int updateUser(User user) {
+		// TODO Auto-generated method stub
+		return this.userMapper.updateByPrimaryKey(user);
+	}
+
 }

@@ -1,115 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>开始使用Layui</title>
-    <link rel="stylesheet" href="../layui/css/layui.css">
-    <link rel="stylesheet" href="../style/admin.css">
+   <title>�����û�</title>
+   <script src="/js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-<div class="layui-header">
-<p class="login-fun">欢迎您<a class="layui-btn layui-btn-normal">退出</a></p>
-</div>
-<ul class="layui-nav layui-nav-side layui-nav-tree" lay-filter="test">
-    <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
-    <li class="layui-nav-item layui-this"><a href="">我的主页</a></li>
-    <li class="layui-nav-item"><a href="">我的考勤</a></li>
-    <li class="layui-nav-item"><a href="">部门管理</a></li>
-    <li class="layui-nav-item"><a href="">职务管理</a></li>
-    <li class="layui-nav-item"><a href="">新闻管理</a></li>
-    <li class="layui-nav-item"><a href="">人员管理</a></li>
-    <li class="layui-nav-item"><a href="">个人信息</a></li>
-    <li class="layui-nav-item"><a href="">密码修改</a></li>
-</ul>
-<div class="layui-site-content ">
-    <h1 class="layui-colla-title title-from">新增人员</h1>
-
-    <form class="layui-form form-them" action="">
-        <div class="layui-form-item">
-            <label class="layui-form-label">姓名</label>
-            <div class="layui-input-block">
-                <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">出生日期</label>
-            <div class="layui-input-block">
-                <input type="text" name="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">入职时间</label>
-            <div class="layui-input-block">
-                <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">入职部门</label>
-            <div class="layui-input-block">
-                <select name="interest" lay-filter="aihao">
-                    <option value=""></option>
-                    <option value="0">写作</option>
-                    <option value="1" selected="">阅读</option>
-                    <option value="2">游戏</option>
-                    <option value="3">音乐</option>
-                    <option value="4">旅行</option>
-                </select>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">家庭住址</label>
-            <div class="layui-input-block">
-                <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">籍贯</label>
-            <div class="layui-input-block">
-                <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">联系方式</label>
-            <div class="layui-input-block">
-                <input type="tel" name="phone" lay-verify="phone" autocomplete="off" class="layui-input" placeholder="请输入标题">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-            </div>
-        </div>
-    </form>
-</div>
-
-<script src="../layui/layui.js"></script>
-<script>
-
-    //一般直接写在一个js文件中
-    layui.use(['jquery','layer', 'form', 'element','laypage','laydate'], function () {
-        var $ = layui.jquery,
-            layer = layui.layer,
-            form = layui.form(),
-            element = layui.element(),
-            laypage = layui.laypage,
-            laydate = layui.laydate;
-        form.verify({
-            title: function(value){
-                if(value.length < 5){
-                    return '标题至少得5个字符啊';
-                }
-            }
-        });
-        //监听提交
-        form.on('submit(demo1)', function(data){
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            })
-            return false;
-        });
-    });
+		<form action="" method="post" >
+			UserName:<input type="text" id="username"  placeholder="�������û���" /> <br>
+			PassWord:<input type="password" id="password"  placeholder="����������" /> 
+			<br> <input type="button" id="register"  value="register" />
+		</form>
+<script type="text/javascript">
+$().ready(function() {
+	$("#register").click(function() {
+		$.ajax({
+			url : "/UserList/adduser",
+			type : "POST",
+			data : {
+				"username" : $("#username").val(),
+				"password" : $("#password").val()
+			},
+			success : function(data) {
+				alert(data.message);
+				window.location.href = "/UserList/";
+			}
+		});
+	})	
+})
 </script>
 
 </body>

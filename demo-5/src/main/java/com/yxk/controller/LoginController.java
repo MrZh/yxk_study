@@ -1,13 +1,11 @@
 package com.yxk.controller;
 
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,8 +22,9 @@ public class LoginController {
 	private impUserService ius;
 	
 	@RequestMapping(value = "/in", method = RequestMethod.POST)
-	public @ResponseBody Result logined(HttpServletRequest request,Result result)
+	public @ResponseBody Result logined(HttpServletRequest request)
 	{
+		Result result = new Result();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		User user = new User();
@@ -58,12 +57,6 @@ public class LoginController {
 			return result;
 	}
 	
-	@RequestMapping(value = "/userlist" , method = RequestMethod.GET)
-	public @ResponseBody String userlist(@ModelAttribute("userlist")List<User> users,ModelMap model)
-	{
-		 users = ius.getAll();
-		model.addAttribute(users);
-		return "UserList";
-	}
+	
 	
 }
