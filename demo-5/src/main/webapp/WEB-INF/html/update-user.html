@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>用户修改</title>
+<script src="../js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+    <input type="hidden" id="userid" name="userid" />
+    <input type="text" id="username" name="username" />
+    <input type="text"id="password" name="password" />
+    <input type="button" id="submit" value="submit"/>
+
+ <script>
+     $().ready(function () {
+
+         function getUrlParam(name) {
+             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+             var r = window.location.search.substr(1).match(reg); //匹配目标参数
+             if (r != null) return unescape(r[2]); return null; //返回参数值
+         }
+
+         var id = getUrlParam("id");
+         console.log(id);
+         $.ajax({
+
+             url: "/UserList/getUser",
+             type: "get",
+             data: { id: id },
+             success: function (data) {
+
+                 $("#username").attr("value", data.data.username);
+                 $("#password").attr("value", data.data.password);
+                 $("#userid").attr("value", data.data.userid);
+                 console.log(data);
+             }
+         })
+
+         $("#submit").on("click", function () {
+             alert(1);
+             $.ajax({
+
+                 url: "/UserList/updateUser",
+                 type: "post",
+                 data: { userid: $("#userid").val(), username: $("#username").val(), password: $("#password").val() },
+                 success: function (data) {
+                     console.log(data);
+                 }
+             })
+
+         })
+     })
+ </script>
+</body>
+</html>
