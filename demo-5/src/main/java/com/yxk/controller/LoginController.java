@@ -2,8 +2,10 @@ package com.yxk.controller;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +23,13 @@ public class LoginController {
 	@Autowired(required=false)
 	private impUserService ius;
 	
+	@Autowired
+	private  RedisTemplate<String, String> mRedisTemplate;  
+	
 	@RequestMapping(value = "/in", method = RequestMethod.POST)
 	public @ResponseBody Result logined(HttpServletRequest request)
 	{
+		
 		Result result = new Result();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -53,7 +59,9 @@ public class LoginController {
 			result.setCode(1);
 			result.setData(user);
 			result.setMessage("登录成功！");
-		
+			HttpSession httpSession = request.getSession();
+			httpSession.setAttribute("username", username);
+			mRedisTemplate.opsForValue().set("username",username);
 			return result;
 	}
 	

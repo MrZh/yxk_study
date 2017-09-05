@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
@@ -23,5 +21,31 @@
 	        <property name="prefix" value="/WEB-INF/html/"/>
 	        <property name="suffix" value=".html"/>
 	</bean>
-
+	<!-- springmvc拦截器实现对用户登录状态的判断 -->
+	<mvc:interceptors>  
+        <!-- <mvc:interceptor>  
+            <mvc:mapping path="/download/**" />  
+            <mvc:mapping path="/upload/**" />  
+            <bean class="com.yxk.interceptor.AuthInterceptor" />  
+        </mvc:interceptor> -->  
+        <!-- 检查用户权限，对于部分不需要权限的路径进行排除 -->  
+        <mvc:interceptor>  
+            <!-- 先匹配所有路径，然后排除不需要检查的路径 -->  
+            <mvc:mapping path="/**" />  
+            <!-- 与登录相关的请求 -->  
+            <mvc:exclude-mapping path="/login/in" />  
+            <!-- 以下是静态资源 -->  
+            <mvc:exclude-mapping path="/img/**" />  
+            <mvc:exclude-mapping path="/css/**" />  
+            <mvc:exclude-mapping path="/bootstrap/**" />  
+            <mvc:exclude-mapping path="/js/**" />  
+            <mvc:exclude-mapping path="/My97DatePicker/**" />  
+            <mvc:exclude-mapping path="/ueditorFile/**" />  
+            <!-- 客户端文件上传下载，不使用该校验 -->  
+            <!-- <mvc:exclude-mapping path="/download/**" />  
+            <mvc:exclude-mapping path="/upload/**" /> -->  
+            <!-- 用户是否已经登录的检查 -->  
+            <bean id="loginInterceptor" class="com.yxk.interceptor.LoginInterceptor"></bean>  
+        </mvc:interceptor>  
+    </mvc:interceptors>  
 </beans>

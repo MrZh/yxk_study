@@ -14,15 +14,15 @@ public class indexController {
 	@Autowired
 	private impUserService impUserService;
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+//	@RequestMapping(value = "/login", method = RequestMethod.GET)
+//	public String login()
+//	{
+//		return "login";
+//	}
+	@RequestMapping(value = "/" , method = RequestMethod.GET)
 	public String login()
 	{
 		return "login";
-	}
-	@RequestMapping(value = "/" , method = RequestMethod.GET)
-	public String index()
-	{
-		return "index";
 		
 	}
 }

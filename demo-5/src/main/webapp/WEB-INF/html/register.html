@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>用户注册</title>
+<title>注册新用户</title>
 <script src="/js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
@@ -27,7 +27,7 @@ $().ready(function() {
 			success : function(data) {
 				alert(data.message);
 				if (data.code == 1) {
-					window.location.href = "/index/login"
+					window.location.href = "/index/"
 				}
 			}
 		});

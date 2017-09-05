@@ -3,7 +3,9 @@ package com.yxk.controller;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +20,7 @@ import com.yxk.model.User;
 
 @Controller
 @RequestMapping("/UserList")
-public class UserListController {
+public class UserListController{
 
 	@Autowired
 	private impUserService ius = null;
@@ -27,8 +29,14 @@ public class UserListController {
 	private UserMapper userdao;
 	
 	@RequestMapping(value = "/" , method = RequestMethod.GET)
-	public String userlist()
+	public String userlist(HttpSession session,HttpServletRequest request)
 	{
+//		session = request.getSession();
+//		if(session.getAttribute("username") == null)
+//		{
+//			return "redirect:/index/";
+//		}
+//		System.out.println(session.getAttribute("username"));
 		return "UserList";
 	}
 	

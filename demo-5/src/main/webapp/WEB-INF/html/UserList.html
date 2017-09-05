@@ -28,8 +28,11 @@
             <td>${userid}</td>
             <td>${username}</td>
             <td>${password}</td>
-            <td><button class="delete" data-val="${userid}">delete</button>
-<a class="update" href="javascript:void(0)" data-val="${userid}">update</a></td>
+            <td>
+			<a class="delete" href="javascript:void(0)" data-val="${userid}">delete</a>
+			<a class="update" href="javascript:void(0)" data-val="${userid}">update</a>
+			<a class="details" href="javascript:void(0)" data-val="${userid}">details</a>
+			</td>
         </tr>
     </script>
     <script type="text/javascript">
@@ -88,6 +91,10 @@
             $(document).on("click", ".update", function () {
                 var id = $(this).attr("data-val")
                 window.location.href = "/UserList/update?id="+id;
+            })
+            $(document).on("click", ".details", function () {
+                var id = $(this).attr("data-val")
+                window.location.href = "/details/?id="+id;
             })
         })
 
