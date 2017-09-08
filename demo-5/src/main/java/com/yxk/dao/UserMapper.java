@@ -42,5 +42,11 @@ public interface UserMapper {
     
     @Select("select count(0) from demo_user where UserName = #{username}")
     int selectByUserNmae(@Param("username")String username);
+    
+    @Select("select count(0) from demo_user where Email = #{email}")
+    int selectByUserEmail(@Param("email")String email);
+    
+    @Select("select UserName from demo_user where Email=#{email}")
+    User selectByName(String email);
 }
 

@@ -12,8 +12,6 @@
 
 	<context:component-scan base-package="com.yxk" />
 
-
-
 	<!-- 配置数据源 -->
 	<bean name="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		 destroy-method="close">
@@ -32,6 +30,16 @@
 		<!-- 获取连接最大等待时间 -->
 		<property name="maxWait" value="60000" />
 	</bean>
+		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		<property name="mapperLocations" value="classpath*:config/mappers/**/*.xml" />
+	</bean>
+
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.yxk.dao" />
+	</bean>
 	
 	 <!-- mybatis related... start -->  
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
@@ -43,17 +51,6 @@
             </list>  
         </property>  
     </bean>  
-
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:mybatis-config.xml" />
-		<property name="mapperLocations" value="classpath*:config/mappers/**/*.xml" />
-	</bean>
-
-
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.yxk.dao" />
-	</bean>
 	
 	 <!-- redis  config  start -->  
     <!-- 配置JedisPoolConfig实例 -->  

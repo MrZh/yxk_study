@@ -10,17 +10,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yxk.dao.Manage_userMapper;
 import com.yxk.dao.UserMapper;
 import com.yxk.impl.impUserService;
 import com.yxk.model.Result;
 import com.yxk.model.User;
+import com.yxk.model.manage_user;
 
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
 
 	@Autowired
-	private UserMapper userdao;
+	private Manage_userMapper userdao;
 	
 	@Autowired
 	private impUserService ius;
@@ -34,12 +36,12 @@ public class RegisterController {
 	@RequestMapping(value = "/addUser",method = RequestMethod.POST)
 	public @ResponseBody Result addUser(HttpServletRequest request)
 	{
-		User user = new User();
+		manage_user user = new manage_user();
 		Result result = new Result();
-		String username = request.getParameter("username");
+		String loginemail = request.getParameter("loginemail");
 		String password = request.getParameter("password");
 		String userid = UUID.randomUUID().toString();
-		if(username == null || username.equals(""))
+		if(loginemail == null || loginemail.equals(""))
 		{
 			result.setCode(0);
 			result.setMessage("用户名不能为空！请重新输入！");
@@ -51,16 +53,16 @@ public class RegisterController {
 			result.setMessage("密码不能为空！请重新输入！");
 			return result;
 		}
-		if(ius.getUserName(username) > 0)
-		{
-			result.setCode(0);
-			result.setMessage("用户已存在！请重新输入！");
-			return result;
-		}
+//		if(ius.getUserName(username) > 0)
+//		{
+//			result.setCode(0);
+//			result.setMessage("用户已存在！请重新输入！");
+//			return result;
+//		}
 		user.setUserid(userid);
-		user.setUsername(username);
+		user.setLoginEmail(loginemail);
 		user.setPassword(password);
-		int i =userdao.insert(user);
+		int i = userdao.insert(user);
 		if(i >0)
 		{
 			result.setCode(1);

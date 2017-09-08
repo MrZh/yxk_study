@@ -21,7 +21,7 @@ $().ready(function() {
 			url : "/register/addUser",
 			type : "POST",
 			data : {
-				"username" : $("#username").val(),
+				"loginEmail" : $("#username").val(),
 				"password" : $("#password").val()
 			},
 			success : function(data) {

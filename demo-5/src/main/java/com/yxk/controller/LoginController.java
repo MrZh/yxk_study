@@ -31,12 +31,12 @@ public class LoginController {
 	{
 		
 		Result result = new Result();
-		String username = request.getParameter("username");
+		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		User user = new User();
-		user.setUsername(username);
+		user.setUsername(email);
 		user.setPassword(password);
-		if(username == null || username.equals(""))
+		if(email == null || email.equals(""))
 		{
 			result.setCode(0);
 			result.setMessage("用户名不能为空！请输入用户名！");
@@ -48,14 +48,14 @@ public class LoginController {
 			result.setMessage("密码不能为空！请输入密码！");
 			return result;
 		}
-		System.out.println(ius.login(username, password));
-		if(ius.login(username, password) <= 0)
+		System.out.println(ius.login(email, password));
+		if(ius.login(email, password) <= 0)
 		{
 			result.setCode(0);
 			result.setMessage("用户名或密码不正确！请重新输入！");
 			return result;
 		}
-		
+			String username=ius.getUserName(email).getUsername();
 			result.setCode(1);
 			result.setData(user);
 			result.setMessage("登录成功！");

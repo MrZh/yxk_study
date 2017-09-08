@@ -11,7 +11,7 @@
 <div class="container">
 	<div class="login">
 		<form action="/login/in" method="post" class="layui-form">
-			UserName:<input type="text" id="username" lay-verify="title" autocomplete="off" placeholder="ÇëÊäÈëÓÃ»§Ãû" class="layui-input"/> <br>
+			UserName:<input type="text" id="Email" lay-verify="title" autocomplete="off" placeholder="ÇëÊäÈëÓÊÏä" class="layui-input"/> <br>
 			PassWord:<input type="password" id="password"  lay-verify="pass" placeholder="ÇëÊäÈëÃÜÂë" autocomplete="off" class="layui-input" /> 
 			<br> <input type="button" id="check" value="login" />
 			     <input type="button" id="register" onclick="javascript:window.location.href='/register/'" value="register" />
@@ -25,7 +25,7 @@
 					url : "/login/in",
 					type : "post",
 					data : {
-						"username" : $("#username").val(),
+						"email" : $("#Email").val(),
 						"password" : $("#password").val()
 					},
 					success : function(data) {

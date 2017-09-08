@@ -6,13 +6,15 @@ import com.yxk.model.User;
 
 public interface UserService {
 	
-	int login(String username,String password);
+	int login(String email,String password);
 	
 	List<User> getAll();
 	
-	int getUserName(String username);
+	User getUserName(String email);
 	
 	int deleteUser(String userid);
 	
 	int updateUser(User user);
+	
+	int getUserEmail(String email);
 }

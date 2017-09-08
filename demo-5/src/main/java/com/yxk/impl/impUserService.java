@@ -17,9 +17,9 @@ public class impUserService implements UserService{
 	private  UserMapper userMapper;
 	
 	@Override
-	public int login(String username, String password) {
+	public int login(String email, String password) {
 		// TODO Auto-generated method stub
-		return this.userMapper.selectByPrimaryKey(username, password);
+		return this.userMapper.selectByPrimaryKey(email, password);
 	}
 
 	@Override
@@ -29,9 +29,9 @@ public class impUserService implements UserService{
 	}
 
 	@Override
-	public int getUserName(String username) {
+	public User getUserName(String email) {
 		// TODO Auto-generated method stub
-		return this.userMapper.selectByUserNmae(username);
+		return this.userMapper.selectByName(email);
 	}
 
 	@Override
@@ -44,6 +44,12 @@ public class impUserService implements UserService{
 	public int updateUser(User user) {
 		// TODO Auto-generated method stub
 		return this.userMapper.updateByPrimaryKey(user);
+	}
+
+	@Override
+	public int getUserEmail(String email) {
+		// TODO Auto-generated method stub
+		return this.userMapper.selectByUserEmail(email);
 	}
 
 }
