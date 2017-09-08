@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>权限用户表显示</title>
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/js/jquery.tmpl.min.js"></script>
+</head>
+<body>
+<h1>显示用户</h1>
+-------------------------------------------------
+<br>
+<a href="javascript:void(0)" onclick="javascript:window.location.href='/UserManager/add'">添加用户</a>
+<table border="1">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>用户名</th>
+			<th>Url</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody id="tbody">
+		
+	</tbody>
+</table>
+<script type="text/x-jquery-tmpl" id="data-tmp">
+	<tr>
+		<td>${id}</td>
+		<td>${name}</td>
+		<td>${url}</td>
+		<td>
+		<a href ="javascript:void(0)" class="update" data-val="${id}">update</a>
+		<a href ="javascript:void(0)" class="delete" data-val="${id}">delete</a>
+		</td>
+	</tr>
+</script>
+<script type="text/javascript">
+	$().ready(function(){
+		$.ajax({
+			url:"/UserManager/userList",
+			type:"get",
+			success:function(data){
+				console.log(data.data);
+				 $("#data-tmp").tmpl(data.data).appendTo("#tbody");
+			}
+		});
+		$(document).on("click",".delete",function(){
+			var id = $(this).attr("data-val");
+			$.ajax({
+				url:"/UserManager/delete",
+				type:"post",
+				data:{
+					"id":id
+				},
+				success:function(data){
+					alert(data.message);
+					window.location.href = "/UserManager/";
+				}
+			});
+		})
+		$(document).on("click",".update",function(){
+			var id = $(this).attr("data-val");			
+			window.location.href = "/UserManager/update?id="+id;
+		})
+	})
+</script>
+</body>
+</html>

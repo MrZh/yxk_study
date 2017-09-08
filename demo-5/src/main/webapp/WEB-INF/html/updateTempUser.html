@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>权限分配修改</title>
+<script src="/js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<input type="hidden" id="id">
+	权限ID:<input type="text" id="temp_id"  /> <br>
+	用户ID:<input type="text" id="userid"    /> 
+	<br> <input type="button" id="update"  value="update" />
+<script type="text/javascript">
+$().ready(function() {
+	 function getUrlParam(name) {
+         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+         var r = window.location.search.substr(1).match(reg); //匹配目标参数
+         if (r != null) return unescape(r[2]); return null; //返回参数值
+     }
+	var id = getUrlParam("id");
+	console.log(id);
+	$.ajax({
+		url:"/tempUser/select",
+		type : "GET",
+		data:{
+			id:id
+		},
+		success:function(data){
+			$("#id").attr("value",data.data.id),
+			$("#temp_id").attr("value",data.data.temp_id),
+			$("#userid").attr("value",data.data.userid)
+		}
+	});
+	$("#update").click(function() {
+		$.ajax({
+			url : "/tempUser/updated",
+			type : "POST",
+			data : {
+				"id":$("#id").val(),
+				"temp_id":$("#temp_id").val(),
+				"userid":$("#userid").val()
+			},
+			success : function(data) {
+				alert(data.message);
+				if (data.code == 1) {
+					window.location.href = "/tempUser/"
+				}
+			}
+		});
+
+	})
+	
+})
+</script>
+</body>
+</html>

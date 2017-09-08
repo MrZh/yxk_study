@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>用户信息修改</title>
+<script src="/js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+	<input type="hidden" id="id">
+	Name:<input type="text" id="name"  /> <br>
+	Url:<input type="text" id="url"    /> 
+	<br> <input type="button" id="update"  value="update" />
+<script type="text/javascript">
+$().ready(function() {
+	 function getUrlParam(name) {
+         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+         var r = window.location.search.substr(1).match(reg); //匹配目标参数
+         if (r != null) return unescape(r[2]); return null; //返回参数值
+     }
+	var id = getUrlParam("id");
+	console.log(id);
+	$.ajax({
+		url:"/UserManager/select",
+		type : "GET",
+		data:{
+			id:id
+		},
+		success:function(data){
+			$("#id").attr("value",data.data.id),
+			$("#name").attr("value",data.data.name),
+			$("#url").attr("value",data.data.url)
+		}
+	});
+	$("#update").click(function() {
+		$.ajax({
+			url : "/UserManager/updated",
+			type : "POST",
+			data : {
+				"id":$("#id").val(),
+				"name":$("#name").val(),
+				"url":$("#url").val()
+			},
+			success : function(data) {
+				alert(data.message);
+				if (data.code == 1) {
+					window.location.href = "/UserManager/"
+				}
+			}
+		});
+
+	})
+	
+})
+</script>
+</body>
+</html>
