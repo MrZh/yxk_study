@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/jquery.tmpl.min.js"></script>
+    <title>用户列表</title>
+</head>
+<body>
+    <h1>显示用户</h1>
+    ---------------------------------------------
+    <br>
+    <form action="">
+        <input type="button" id="adduser" onclick="javascript:window.location.href='/UserList/add'" value="添加用户" />
+        <table border="1" width="45%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>姓名</th>
+                    <th>密码</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+    </form>
+    <script type="text/x-jquery-tmpl" id="data-tmp">
+        <tr>
+            <td>${userid}</td>
+            <td>${username}</td>
+            <td>${password}</td>
+            <td>
+			<a class="delete" href="javascript:void(0)" data-val="${userid}">delete</a>
+			<a class="update" href="javascript:void(0)" data-val="${userid}">update</a>
+			<a class="details" href="javascript:void(0)" data-val="${userid}">details</a>
+			</td>
+        </tr>
+    </script>
+    <script type="text/javascript">
+        $().ready(function () {
+            $.ajax({
+                url: "/UserList/userlist",
+                type: "get",
+                success: function (data) {
+                    //console.log(JSON.stringify(data));
+                    //var tbody = "";
+                    ////------------遍历对象 .each的使用-------------
+                    ///*
+                    //       对象语法JSON数据格式(当服务器端回调回来的对象数据格式是json数据格式，
+                    // 必须保证JSON的格式要求，回调的对象必须使用eval函数进行转化（否则将得不到Object）。
+                    // 本文不作详细介绍服务器端回调的数据问题，我们将直接自定义对象)
+                    //*/
+                    //var obj = eval(data.data);
+                    ////下面使用each进行遍历
+                    //$.each(data.data, function (n, value) {
+                    //    var trs = "";
+                    //    trs += "<tr><td>" + value.userid + "</td> <td>"
+                    //        + value.username + "</td> <td>" + value.password
+                    //        + "</td> <td align='center'><input type='button'  class = 'update' value='修改' data-val=" + value.userid + ">"
+                    //        + "<input type='button'  class ='delete' value='删除' data-val=" + value.userid + ">"
+                    //        + "</td></tr>";
+                    //    tbody += trs;
+                    //});
+                    console.log(data);
+                    $("#data-tmp").tmpl(data.data).appendTo("#tbody");
+
+                    //$("#tbody").append(tbody);
+                }
+            });
+            $(document).on("click", ".delete", function () {
+                var id = $(this).attr("data-val");
+                console.log(id);
+
+                console.log(JSON.stringify(id));
+
+                $.ajax({
+                    url: "/UserList/delete",
+                    type: "post",
+                    data: {
+                        "userId": id
+                    },
+
+                    success: function (data) {
+                        alert(data.message);
+                        if (data.code > 0) {
+                            window.location.href = "/UserList/";
+                        }
+                    }
+                });
+            })
+
+            $(document).on("click", ".update", function () {
+                var id = $(this).attr("data-val")
+                window.location.href = "/UserList/update?id="+id;
+            })
+            $(document).on("click", ".details", function () {
+                var id = $(this).attr("data-val")
+                window.location.href = "/details/?id="+id;
+            })
+        })
+
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>注册新用户</title>
+<script src="/js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<div class="container">
+	<div class="login">
+		<form action="/login/in" method="post" class="layui-form">
+			UserName:<input type="text" id="username"  placeholder="请输入用户名" class="layui-input"/> <br>
+			PassWord:<input type="password" id="password"  placeholder="请输入密码" class="layui-input" /> 
+			<br> <input type="button" id="register"  value="register" />
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+$().ready(function() {
+	$("#register").click(function() {
+		$.ajax({
+			url : "/register/addUser",
+			type : "POST",
+			data : {
+				"loginEmail" : $("#username").val(),
+				"password" : $("#password").val()
+			},
+			success : function(data) {
+				alert(data.message);
+				if (data.code == 1) {
+					window.location.href = "/index/"
+				}
+			}
+		});
+
+	})
+	
+})
+</script>
+</body>
+</html>

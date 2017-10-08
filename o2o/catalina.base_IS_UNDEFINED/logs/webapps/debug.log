@@ -1,0 +1,4 @@
+2017-10-04 21:09:05.410 [589873731@qtp-1717159510-0] DEBUG com.imooc.o2o.dao.AreaDao.queryArea - ==>  Preparing: SELECT area_id, area_name, priority, create_time, last_edit_time FROM tb_area ORDER BY priority DESC 
+2017-10-04 21:09:05.659 [589873731@qtp-1717159510-0] DEBUG com.imooc.o2o.dao.AreaDao.queryArea - ==> Parameters: 
+2017-10-04 21:09:05.733 [589873731@qtp-1717159510-0] DEBUG com.imooc.o2o.dao.AreaDao.queryArea - <==      Total: 4
+2017-10-04 21:09:05.754 [589873731@qtp-1717159510-0] DEBUG com.imooc.o2o.web.superadmin.AreaController - costTime:[1092ms]

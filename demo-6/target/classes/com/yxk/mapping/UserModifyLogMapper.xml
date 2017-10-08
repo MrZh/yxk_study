@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yxk.dao.UserModifyLogMapper" >
+  <resultMap id="BaseResultMap" type="com.yxk.model.UserModifyLog" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="original_department_id" property="originalDepartmentId" jdbcType="VARCHAR" />
+    <result column="now_department_id" property="nowDepartmentId" jdbcType="VARCHAR" />
+    <result column="original_resign" property="originalResign" jdbcType="VARCHAR" />
+    <result column="now_resgin" property="nowResgin" jdbcType="VARCHAR" />
+    <result column="modify_userid" property="modifyUserid" jdbcType="VARCHAR" />
+    <result column="create_userid" property="createUserid" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.yxk.model.UserModifyLog" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, modify_time, original_department_id, now_department_id, original_resign, now_resgin, 
+    modify_userid, create_userid
+  </sql>
+  <sql id="Base_Column_List_1" >
+    m.id, modify_time, original_department_id, now_department_id, original_resign, now_resgin, 
+    m.modify_userid, m.create_userid
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user_modify_log
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user_modify_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.yxk.model.UserModifyLog" >
+    insert into user_modify_log (id, modify_time, original_department_id, 
+      now_department_id, original_resign, now_resgin, 
+      modify_userid, create_userid, content
+      )
+    values (#{id,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}, #{originalDepartmentId,jdbcType=VARCHAR}, 
+      #{nowDepartmentId,jdbcType=VARCHAR}, #{originalResign,jdbcType=VARCHAR}, #{nowResgin,jdbcType=VARCHAR}, 
+      #{modifyUserid,jdbcType=VARCHAR}, #{createUserid,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yxk.model.UserModifyLog" >
+    insert into user_modify_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="originalDepartmentId != null" >
+        original_department_id,
+      </if>
+      <if test="nowDepartmentId != null" >
+        now_department_id,
+      </if>
+      <if test="originalResign != null" >
+        original_resign,
+      </if>
+      <if test="nowResgin != null" >
+        now_resgin,
+      </if>
+      <if test="modifyUserid != null" >
+        modify_userid,
+      </if>
+      <if test="createUserid != null" >
+        create_userid,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="originalDepartmentId != null" >
+        #{originalDepartmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="nowDepartmentId != null" >
+        #{nowDepartmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="originalResign != null" >
+        #{originalResign,jdbcType=VARCHAR},
+      </if>
+      <if test="nowResgin != null" >
+        #{nowResgin,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyUserid != null" >
+        #{modifyUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserid != null" >
+        #{createUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yxk.model.UserModifyLog" >
+    update user_modify_log
+    <set >
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="originalDepartmentId != null" >
+        original_department_id = #{originalDepartmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="nowDepartmentId != null" >
+        now_department_id = #{nowDepartmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="originalResign != null" >
+        original_resign = #{originalResign,jdbcType=VARCHAR},
+      </if>
+      <if test="nowResgin != null" >
+        now_resgin = #{nowResgin,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyUserid != null" >
+        modify_userid = #{modifyUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserid != null" >
+        create_userid = #{createUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yxk.model.UserModifyLog" >
+    update user_modify_log
+    set modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      original_department_id = #{originalDepartmentId,jdbcType=VARCHAR},
+      now_department_id = #{nowDepartmentId,jdbcType=VARCHAR},
+      original_resign = #{originalResign,jdbcType=VARCHAR},
+      now_resgin = #{nowResgin,jdbcType=VARCHAR},
+      modify_userid = #{modifyUserid,jdbcType=VARCHAR},
+      create_userid = #{createUserid,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yxk.model.UserModifyLog" >
+    update user_modify_log
+    set modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      original_department_id = #{originalDepartmentId,jdbcType=VARCHAR},
+      now_department_id = #{nowDepartmentId,jdbcType=VARCHAR},
+      original_resign = #{originalResign,jdbcType=VARCHAR},
+      now_resgin = #{nowResgin,jdbcType=VARCHAR},
+      modify_userid = #{modifyUserid,jdbcType=VARCHAR},
+      create_userid = #{createUserid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="select" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select m.id, modify_time, original_department_id, now_department_id, original_resign, now_resgin, 
+    m.modify_userid, m.create_userid
+    from user_modify_log m
+    left join department d 
+    on m.original_department_id = d.id
+    where m.id = #{id,jdbcType=VARCHAR}
+  </select>
+</mapper>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yxk.dao.AttendanceLogMapper" >
+  <resultMap id="BaseResultMap" type="com.yxk.model.AttendanceLog" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="attendance_time" property="attendanceTime" jdbcType="TIMESTAMP" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="attendancetype" property="attendancetype" jdbcType="INTEGER" />
+    <result column="isdayoff" property="isdayoff" jdbcType="INTEGER" />
+    <result column="attendance_ip" property="attendanceIp" jdbcType="VARCHAR" />
+    <result column="attendance_year" property="attendanceYear" jdbcType="VARCHAR" />
+    <result column="attendance_day" property="attendanceDay" jdbcType="VARCHAR" />
+    <result column="attendance_month" property="attendanceMonth" jdbcType="VARCHAR" />
+    <result column="log_out_time" property="logOutTime" jdbcType="TIMESTAMP" />
+    <result column="log_out_type" property="logOutType" jdbcType="INTEGER" />
+    <result column="should_log_out_time" property="shouldLogOutTime" jdbcType="TIMESTAMP" />
+    <result column="should_attendance_time" property="shouldAttendanceTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, attendance_time, userid, attendancetype, isdayoff, attendance_ip, attendance_year, 
+    attendance_day, attendance_month, log_out_time, log_out_type, should_log_out_time, 
+    should_attendance_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from attendance_log
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from attendance_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.yxk.model.AttendanceLog" >
+    insert into attendance_log (id, attendance_time, userid, 
+      attendancetype, isdayoff, attendance_ip, 
+      attendance_year, attendance_day, attendance_month, 
+      log_out_time, log_out_type, should_log_out_time, 
+      should_attendance_time)
+    values (#{id,jdbcType=VARCHAR}, #{attendanceTime,jdbcType=TIMESTAMP}, #{userid,jdbcType=VARCHAR}, 
+      #{attendancetype,jdbcType=INTEGER}, #{isdayoff,jdbcType=INTEGER}, #{attendanceIp,jdbcType=VARCHAR}, 
+      #{attendanceYear,jdbcType=VARCHAR}, #{attendanceDay,jdbcType=VARCHAR}, #{attendanceMonth,jdbcType=VARCHAR}, 
+      #{logOutTime,jdbcType=TIMESTAMP}, #{logOutType,jdbcType=INTEGER}, #{shouldLogOutTime,jdbcType=TIMESTAMP}, 
+      #{shouldAttendanceTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yxk.model.AttendanceLog" >
+    insert into attendance_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="attendanceTime != null" >
+        attendance_time,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="attendancetype != null" >
+        attendancetype,
+      </if>
+      <if test="isdayoff != null" >
+        isdayoff,
+      </if>
+      <if test="attendanceIp != null" >
+        attendance_ip,
+      </if>
+      <if test="attendanceYear != null" >
+        attendance_year,
+      </if>
+      <if test="attendanceDay != null" >
+        attendance_day,
+      </if>
+      <if test="attendanceMonth != null" >
+        attendance_month,
+      </if>
+      <if test="logOutTime != null" >
+        log_out_time,
+      </if>
+      <if test="logOutType != null" >
+        log_out_type,
+      </if>
+      <if test="shouldLogOutTime != null" >
+        should_log_out_time,
+      </if>
+      <if test="shouldAttendanceTime != null" >
+        should_attendance_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="attendanceTime != null" >
+        #{attendanceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="attendancetype != null" >
+        #{attendancetype,jdbcType=INTEGER},
+      </if>
+      <if test="isdayoff != null" >
+        #{isdayoff,jdbcType=INTEGER},
+      </if>
+      <if test="attendanceIp != null" >
+        #{attendanceIp,jdbcType=VARCHAR},
+      </if>
+      <if test="attendanceYear != null" >
+        #{attendanceYear,jdbcType=VARCHAR},
+      </if>
+      <if test="attendanceDay != null" >
+        #{attendanceDay,jdbcType=VARCHAR},
+      </if>
+      <if test="attendanceMonth != null" >
+        #{attendanceMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="logOutTime != null" >
+        #{logOutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logOutType != null" >
+        #{logOutType,jdbcType=INTEGER},
+      </if>
+      <if test="shouldLogOutTime != null" >
+        #{shouldLogOutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shouldAttendanceTime != null" >
+        #{shouldAttendanceTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yxk.model.AttendanceLog" >
+    update attendance_log
+    <set >
+      <if test="attendanceTime != null" >
+        attendance_time = #{attendanceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="attendancetype != null" >
+        attendancetype = #{attendancetype,jdbcType=INTEGER},
+      </if>
+      <if test="isdayoff != null" >
+        isdayoff = #{isdayoff,jdbcType=INTEGER},
+      </if>
+      <if test="attendanceIp != null" >
+        attendance_ip = #{attendanceIp,jdbcType=VARCHAR},
+      </if>
+      <if test="attendanceYear != null" >
+        attendance_year = #{attendanceYear,jdbcType=VARCHAR},
+      </if>
+      <if test="attendanceDay != null" >
+        attendance_day = #{attendanceDay,jdbcType=VARCHAR},
+      </if>
+      <if test="attendanceMonth != null" >
+        attendance_month = #{attendanceMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="logOutTime != null" >
+        log_out_time = #{logOutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logOutType != null" >
+        log_out_type = #{logOutType,jdbcType=INTEGER},
+      </if>
+      <if test="shouldLogOutTime != null" >
+        should_log_out_time = #{shouldLogOutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shouldAttendanceTime != null" >
+        should_attendance_time = #{shouldAttendanceTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yxk.model.AttendanceLog" >
+    update attendance_log
+    set attendance_time = #{attendanceTime,jdbcType=TIMESTAMP},
+      userid = #{userid,jdbcType=VARCHAR},
+      attendancetype = #{attendancetype,jdbcType=INTEGER},
+      isdayoff = #{isdayoff,jdbcType=INTEGER},
+      attendance_ip = #{attendanceIp,jdbcType=VARCHAR},
+      attendance_year = #{attendanceYear,jdbcType=VARCHAR},
+      attendance_day = #{attendanceDay,jdbcType=VARCHAR},
+      attendance_month = #{attendanceMonth,jdbcType=VARCHAR},
+      log_out_time = #{logOutTime,jdbcType=TIMESTAMP},
+      log_out_type = #{logOutType,jdbcType=INTEGER},
+      should_log_out_time = #{shouldLogOutTime,jdbcType=TIMESTAMP},
+      should_attendance_time = #{shouldAttendanceTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

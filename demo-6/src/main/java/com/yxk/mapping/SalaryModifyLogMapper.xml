@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yxk.dao.SalaryModifyLogMapper" >
+  <resultMap id="BaseResultMap" type="com.yxk.model.SalaryModifyLog" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="create_userid" property="createUserid" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="salary_modify" property="salaryModify" jdbcType="DECIMAL" />
+    <result column="original_salary" property="originalSalary" jdbcType="DECIMAL" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userid, create_userid, create_time, salary_modify, original_salary, content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from salary_modify_log
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from salary_modify_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.yxk.model.SalaryModifyLog" >
+    insert into salary_modify_log (id, userid, create_userid, 
+      create_time, salary_modify, original_salary, 
+      content)
+    values (#{id,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{createUserid,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{salaryModify,jdbcType=DECIMAL}, #{originalSalary,jdbcType=DECIMAL}, 
+      #{content,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yxk.model.SalaryModifyLog" >
+    insert into salary_modify_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="createUserid != null" >
+        create_userid,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="salaryModify != null" >
+        salary_modify,
+      </if>
+      <if test="originalSalary != null" >
+        original_salary,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserid != null" >
+        #{createUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salaryModify != null" >
+        #{salaryModify,jdbcType=DECIMAL},
+      </if>
+      <if test="originalSalary != null" >
+        #{originalSalary,jdbcType=DECIMAL},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yxk.model.SalaryModifyLog" >
+    update salary_modify_log
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserid != null" >
+        create_userid = #{createUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salaryModify != null" >
+        salary_modify = #{salaryModify,jdbcType=DECIMAL},
+      </if>
+      <if test="originalSalary != null" >
+        original_salary = #{originalSalary,jdbcType=DECIMAL},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yxk.model.SalaryModifyLog" >
+    update salary_modify_log
+    set userid = #{userid,jdbcType=VARCHAR},
+      create_userid = #{createUserid,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      salary_modify = #{salaryModify,jdbcType=DECIMAL},
+      original_salary = #{originalSalary,jdbcType=DECIMAL},
+      content = #{content,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
